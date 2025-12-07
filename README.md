@@ -39,11 +39,11 @@ Kết quả phân cụm (ảnh đã chia cụm, file nhãn, hình trực quan h�
 
 - Phân cụm bằng **K-Means**  
 
-      python main.py kmeans
+      python kMeans.py
 
 - Phân cụm bằng **DBSCAN**  
 
-      python main.py dbscan
+      python dbscan.py
 
 - Phân cụm bằng **OPTICS**  
 
