@@ -24,11 +24,10 @@ Cài đặt trực tiếp bằng `pip`:
 
 Ảnh dùng để phân cụm được đặt trong thư mục như sau:
 
-    data/
-      └── input/
-            ├── img1.jpg
-            ├── img2.png
-            ├── ...
+    Dataset/
+      ├── img1.jpg
+      ├── img2.png
+      ├── ...
 
 Kết quả phân cụm (ảnh đã chia cụm, file nhãn, hình trực quan hóa, …) sẽ được lưu vào các thư mục output mà nhóm cấu hình trong code.
 
