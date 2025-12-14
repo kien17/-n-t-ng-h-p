@@ -12,7 +12,25 @@ Toàn bộ chương trình được chạy thông qua file `main.py`.
 - Python **>= 3.10**
 - Hệ điều hành: Windows / Linux / macOS
 
-### 2. Thư viện cần cài
+### 2. Tạo môi trường ảo (virtual environment)
+```
+# Windows
+py -m venv venv
+
+# Linux / macOS:
+python3 -m venv venv
+```
+
+### 3. Kích hoạt môi trường ảo
+```
+# Windows
+venv\Scripts\Activate.ps1
+
+# Linux / macOS:
+source venv/bin/activate
+```
+
+### 4. Thư viện cần cài
 
 Cài đặt trực tiếp bằng `pip`:
 
