@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import shutil
 import math
+import time  # --- Thêm: dùng để đo thời gian ---
 
 def euclidean_distance(a, b):
     return math.sqrt(np.sum((a - b) ** 2))
@@ -18,6 +19,9 @@ def dbscan_custom(data, eps=10.0, min_samples=3):
     labels = [-1] * len(data)     # -1 = noise (nhiễu)
     visited = [False] * len(data)
     cluster_id = 0
+
+    # --- bắt đầu đo thời gian cho phần phân cụm ---
+    start_cluster = time.time()
 
     for i in range(len(data)):
         if visited[i]:
@@ -47,9 +51,15 @@ def dbscan_custom(data, eps=10.0, min_samples=3):
 
             cluster_id += 1
 
+    end_cluster = time.time()
+    print(f"Thời gian chạy DBSCAN (phần phân cụm): {end_cluster - start_cluster:.4f} giây")
+
     return labels
 
 def dbscan(input_dir, output_dir, eps=10.0, min_samples=3, resize=(64, 64)):
+    # --- đo thời gian toàn bộ hàm dbscan ---
+    start_total = time.time()
+
     if os.path.exists(output_dir):
         shutil.rmtree(output_dir)
     os.makedirs(output_dir)
@@ -79,7 +89,6 @@ def dbscan(input_dir, output_dir, eps=10.0, min_samples=3, resize=(64, 64)):
         json.dump(labels, f)
     print("Saved labels_dbscan.json")
 
-    
     unique_labels = set(labels)
     print("Các cụm tìm được:", unique_labels)
 
@@ -92,9 +101,12 @@ def dbscan(input_dir, output_dir, eps=10.0, min_samples=3, resize=(64, 64)):
         folder = "noise" if lbl == -1 else f"cluster_{lbl}"
         shutil.copy(path, os.path.join(output_dir, folder, os.path.basename(path)))
 
+    end_total = time.time()
+    print(f"Thời gian chạy DBSCAN (cả pipeline đọc ảnh + phân cụm + lưu): {end_total - start_total:.4f} giây")
+
 if __name__ == "__main__":
-    input_dir = "./Dataset"
-    output_dir = "./Data_output/output_dbscan"
+    input_dir = "./data/input"
+    output_dir = "./data/Data_output/output_dbscan"
 
     dbscan(input_dir, output_dir, eps=15.0, min_samples=5)
 
